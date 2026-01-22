@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Dashboard from "@/components/dashboard";
+import Flows from "@/components/flows";
 
 export const metadata: Metadata = {
-  title: "Dashboard | Aura",
-  description: "Dashboard page for Aura",
+  title: "Flows | Aura",
+  description: "Flows page for Aura",
   icons: {
     icon: {
       url: "/logos/favicon.png",
@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   },
 };
 
-const DashboardPage = () => {
+const FlowsPage = () => {
   return (
    <>
-   <Dashboard/>
+   <Flows/>
    </>
   );
 };
 
-export default DashboardPage;
+export default FlowsPage;
