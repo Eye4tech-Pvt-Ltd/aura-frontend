@@ -1,9 +1,9 @@
+import Settings from "@/components/user/settings";
 import type { Metadata } from "next";
-import Analytics from "@/components/analytics";
 
 export const metadata: Metadata = {
-  title: "Analytics | Aura",
-  description: "Analytics page for Aura",
+  title: "Settings | Aura",
+  description: "Settings page for Aura",
   icons: {
     icon: {
       url: "/logos/favicon.png",
@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   },
 };
 
-const AnalyticsPage = () => {   
+const SettingsPage = () => {   
   return (
    <>
-   <Analytics/>
+   <Settings/>
    </>
   );
 };
 
-export default AnalyticsPage;
+export default SettingsPage;

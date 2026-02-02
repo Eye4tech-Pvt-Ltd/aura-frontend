@@ -1,5 +1,5 @@
+import Integrations from "@/components/user/integrations";
 import type { Metadata } from "next";
-import Integrations from "@/components/integrations";
 
 export const metadata: Metadata = {
   title: "Integrations | Aura",

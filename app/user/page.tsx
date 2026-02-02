@@ -1,9 +1,9 @@
+import Dashboard from "@/components/user/dashboard";
 import type { Metadata } from "next";
-import Settings from "@/components/settings";
 
 export const metadata: Metadata = {
-  title: "Settings | Aura",
-  description: "Settings page for Aura",
+  title: "Dashboard | Aura",
+  description: "Dashboard page for Aura",
   icons: {
     icon: {
       url: "/logos/favicon.png",
@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   },
 };
 
-const SettingsPage = () => {   
+const DashboardPage = () => {
   return (
    <>
-   <Settings/>
+   <Dashboard/>
    </>
   );
 };
 
-export default SettingsPage;
+export default DashboardPage;

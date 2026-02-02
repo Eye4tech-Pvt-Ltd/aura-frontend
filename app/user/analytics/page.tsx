@@ -1,9 +1,9 @@
+import Analytics from "@/components/user/analytics";
 import type { Metadata } from "next";
-import AIAgent from "@/components/agent";
 
 export const metadata: Metadata = {
-  title: "Agent | Aura",
-  description: "Agent page for Aura",
+  title: "Analytics | Aura",
+  description: "Analytics page for Aura",
   icons: {
     icon: {
       url: "/logos/favicon.png",
@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   },
 };
 
-const AgentPage = () => {
+const AnalyticsPage = () => {   
   return (
    <>
-   <AIAgent/>   
+   <Analytics/>
    </>
   );
 };
 
-export default AgentPage;
+export default AnalyticsPage;

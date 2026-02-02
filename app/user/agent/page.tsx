@@ -1,9 +1,9 @@
+import AIAgent from "@/components/user/agent";
 import type { Metadata } from "next";
-import Numbers from "@/components/numbers";
 
 export const metadata: Metadata = {
-  title: "Numbers | Aura",
-  description: "Numbers page for Aura",
+  title: "Agent | Aura",
+  description: "Agent page for Aura",
   icons: {
     icon: {
       url: "/logos/favicon.png",
@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   },
 };
 
-const NumbersPage = () => {   
+const AgentPage = () => {
   return (
    <>
-   <Numbers/>
+   <AIAgent/>   
    </>
   );
 };
 
-export default NumbersPage;
+export default AgentPage;

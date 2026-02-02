@@ -1,9 +1,9 @@
+import Knowledge from "@/components/user/knowledge";
 import type { Metadata } from "next";
-import Calls from "@/components/calls";
 
 export const metadata: Metadata = {
-  title: "Calls | Aura",
-  description: "Calls page for Aura",
+  title: "Knowledge | Aura",
+  description: "Knowledge page for Aura",
   icons: {
     icon: {
       url: "/logos/favicon.png",
@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   },
 };
 
-const CallsPage = () => {
+const KnowledgePage = () => {   
   return (
    <>
-   <Calls/>
+   <Knowledge/>
    </>
   );
 };
 
-export default CallsPage;
+export default KnowledgePage;

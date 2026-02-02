@@ -1,5 +1,5 @@
+import Flows from "@/components/user/flows";
 import type { Metadata } from "next";
-import Flows from "@/components/flows";
 
 export const metadata: Metadata = {
   title: "Flows | Aura",
