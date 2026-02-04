@@ -11,17 +11,17 @@ import {
 } from 'lucide-react';
 
 const navItems = [
-  { label: 'Overview', path: '/' },
-  { label: 'Calls', path: '/calls' },
-  { label: 'AI Agent', path: '/agent' },
-  { label: 'Flows', path: '/flows' },
-  { label: 'Knowledge', path: '/knowledge' },
-  { label: 'Numbers', path: '/numbers' },
-  { label: 'Analytics', path: '/analytics' },
-  { label: 'Team', path: '/team' },
-  { label: 'Integrations', path: '/integrations' },
-  { label: 'Billing', path: '/billing' },
-  { label: 'Settings', path: '/settings' },
+  { label: 'Overview', path: '/user' },
+  { label: 'Calls', path: '/user/calls' },
+  { label: 'AI Agent', path: '/user/agent' },
+  { label: 'Flows', path: '/user/flows' },
+  { label: 'Knowledge', path: '/user/knowledge' },
+  { label: 'Numbers', path: '/user/numbers' },
+  { label: 'Analytics', path: '/user/analytics' },
+  { label: 'Team', path: '/user/team' },
+  { label: 'Integrations', path: '/user/integrations' },
+  { label: 'Billing', path: '/user/billing' },
+  { label: 'Settings', path: '/user/settings' },
 ];
 
 export default function TopNav() {
@@ -43,7 +43,7 @@ export default function TopNav() {
 
         {/* Navigation */}
         <nav className="flex items-center gap-1 overflow-x-auto scrollbar-hide flex-1 justify-center">
-          {navItems.map((item) => {
+          {navItems?.map((item) => {
             const isActive =
               item.path === '/'
                 ? pathname === '/'

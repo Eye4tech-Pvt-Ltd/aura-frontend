@@ -22,17 +22,17 @@ import {
 } from "lucide-react";
 
 const navItems = [
-  { label: "Overview", path: "/", icon: LayoutDashboard },
-  { label: "Calls", path: "/calls", icon: Phone },
-  { label: "AI Agent", path: "/agent", icon: Bot },
-  { label: "Flows", path: "/flows", icon: GitBranch },
-  { label: "Knowledge", path: "/knowledge", icon: BookOpen },
-  { label: "Numbers", path: "/numbers", icon: Hash },
-  { label: "Analytics", path: "/analytics", icon: BarChart3 },
-  { label: "Team", path: "/team", icon: Users },
-  { label: "Integrations", path: "/integrations", icon: Plug },
-  { label: "Billing", path: "/billing", icon: CreditCard },
-  { label: "Settings", path: "/settings", icon: Settings },
+  { label: "Overview", path: "/user", icon: LayoutDashboard },
+  { label: "Calls", path: "/user/calls", icon: Phone },
+  { label: "AI Agent", path: "/user/agent", icon: Bot },
+  { label: "Flows", path: "/user/flows", icon: GitBranch },
+  { label: "Knowledge", path: "/user/knowledge", icon: BookOpen },
+  { label: "Numbers", path: "/user/numbers", icon: Hash },
+  { label: "Analytics", path: "/user/analytics", icon: BarChart3 },
+  { label: "Team", path: "/user/team", icon: Users },
+  { label: "Integrations", path: "/user/integrations", icon: Plug },
+  { label: "Billing", path: "/user/billing", icon: CreditCard },
+  { label: "Settings", path: "/user/settings", icon: Settings },
 ];
 
 const Sidebar = () => {
