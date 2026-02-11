@@ -21,7 +21,7 @@ const useLogin = () => {
     const res = await mutateLogin(payload)
     if (res) {
       localStorage.setItem("token", res.access_token)
-      router.push("/dashboard")
+      router.push("/user")
     }
   }
 
