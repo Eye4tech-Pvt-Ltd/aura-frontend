@@ -19,7 +19,9 @@ import {
   Bell,
   HelpCircle,
   Search,
+  LogOut,
 } from "lucide-react";
+import useLogout from "@/src/hooks/auth/useLogout";
 
 const navItems = [
   { label: "Overview", path: "/user", icon: LayoutDashboard },
@@ -37,6 +39,7 @@ const navItems = [
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const { logout, loadingLogout } = useLogout();
 
   return (
     <>
@@ -112,7 +115,7 @@ const Sidebar = () => {
           {/* Navigation */}
           <nav className="flex-1 px-4 py-4 overflow-y-auto">
             <div className="space-y-1">
-              {navItems.map((item) => {
+              {navItems?.map((item) => {
                 const Icon = item.icon;
                 const isActive = pathname === item.path;
 
@@ -146,6 +149,20 @@ const Sidebar = () => {
               <button className="w-full px-3 py-1.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-xs font-medium rounded-md hover:from-primary-600 hover:to-primary-700 transition-all shadow-md">
                 Upgrade Now
               </button>
+            </div>
+            <div className="mt-4">
+            <button
+              onClick={logout}
+              disabled={loadingLogout}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all w-full ${
+                loadingLogout
+                  ? "opacity-70 cursor-not-allowed"
+                  : "cursor-pointer"
+              } bg-gradient-to-r from-accent-red-500 to-accent-red-600 text-white hover:from-accent-red-600 hover:to-accent-red-700 shadow-lg shadow-accent-red-500/30 hover:shadow-accent-red-500/40 active:scale-[0.98]`}
+            >
+              <LogOut className="w-5 h-5" strokeWidth={2.5} />
+              <span>{loadingLogout ? "Logging out..." : "Log out"}</span>
+            </button>
             </div>
           </div>
         </div>

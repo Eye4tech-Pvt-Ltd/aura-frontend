@@ -4,9 +4,9 @@ import { Formik, Form } from "formik"
 import { useState } from "react"
 import { UserPlus, Eye, EyeOff } from "lucide-react"
 import Link from "next/link"
-import useRegister from "@/src/hooks/useRegister"
 import { registerSchema } from "@/src/schemas/register"
 import { RegisterPayload } from "@/src/types/register"
+import useRegister from "@/src/hooks/auth/useRegister"
 
 const RegisterComponent = () => {
   const { register, loadingRegister } = useRegister()

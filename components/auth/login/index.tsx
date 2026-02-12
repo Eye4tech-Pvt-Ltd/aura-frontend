@@ -4,9 +4,9 @@ import { Formik, Form } from "formik"
 import { useState } from "react"
 import { LogIn, Eye, EyeOff } from "lucide-react"
 import Link from "next/link"
-import useLogin from "@/src/hooks/useLogin"
 import { loginSchema } from "@/src/schemas/login"
 import { LoginPayload } from "@/src/types/login"
+import useLogin from "@/src/hooks/auth/useLogin"
 
 const LoginComponent = () => {
   const { login, loadingLogin } = useLogin()
