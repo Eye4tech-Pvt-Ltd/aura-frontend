@@ -1,9 +1,9 @@
-import Numbers from "@/components/user/numbers";
+import LoginComponent from "@/components/auth/login";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Numbers | Aura",
-  description: "Numbers page for Aura",
+  title: "Login | Aura",
+  description: "Login page for Aura",
   icons: {
     icon: {
       url: "/logos/favicon.png",
@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   },
 };
 
-const NumbersPage = () => {   
+const LoginPage = () => {
   return (
    <>
-   <Numbers/>
+   <LoginComponent/>   
    </>
   );
 };
 
-export default NumbersPage;
+export default LoginPage;
