@@ -1,3 +1,4 @@
+
 import RegisterComponent from "@/components/auth/register";
 import type { Metadata } from "next";
 
@@ -22,3 +23,4 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
+
