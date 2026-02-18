@@ -5,17 +5,13 @@ import { handleAxiosError } from './error-handler'
 import { useState } from 'react'
 import { AxiosResponse } from 'axios'
 
-export const swrFetcher = async <T = any>(url: string): Promise<T> => {
-  const response: AxiosResponse<T> = await apiRequest(
-    () => axiosInstance.get(url),
-    { toast: false }
-  )
-
-  return response.data
+export const swrFetcher = async <T>(url: string): Promise<T> => {
+  return apiRequest<T>(() => axiosInstance.get(url), { toast: false })
 }
+
 export const useGetSWR = <T>(key: string | null) => {
   const { data, error, isLoading, mutate } = useSWR<T>(key, swrFetcher)
-  console.log('Team Members Data:', data)
+  
   return {
     data,
     error,

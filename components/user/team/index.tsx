@@ -134,6 +134,7 @@ const Team = () => {
             <Button
               variant="primary"
               icon={UserPlus}
+              className="cursor-pointer"
               onClick={() => setShowInviteModal(!showInviteModal)}
             >
               Invite Member
