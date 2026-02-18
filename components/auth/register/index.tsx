@@ -1,33 +1,39 @@
-"use client"
+'use client'
 
-import { Formik, Form } from "formik"
-import { useState } from "react"
-import { UserPlus, Eye, EyeOff } from "lucide-react"
-import Link from "next/link"
-import { registerSchema } from "@/src/schemas/register"
-import { RegisterPayload } from "@/src/types/register"
-import useRegister from "@/src/hooks/auth/useRegister"
+import { Formik, Form } from 'formik'
+import { useState } from 'react'
+import { UserPlus, Eye, EyeOff } from 'lucide-react'
+import Link from 'next/link'
+import { registerSchema } from '@/src/schemas/register'
+import { RegisterPayload } from '@/src/types/register'
+import useRegister from '@/src/hooks/auth/useRegister'
 
 const RegisterComponent = () => {
-  const { register, loadingRegister } = useRegister()
+  const { register, loadingRegister, data } = useRegister()
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
-  const [isPasswordConfirmationVisible, setIsPasswordConfirmationVisible] = useState(false)
+  const [isPasswordConfirmationVisible, setIsPasswordConfirmationVisible] =
+    useState(false)
 
   const initialValues: RegisterPayload = {
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
   }
 
   const handleSubmit = async (
     values: RegisterPayload,
-    { setSubmitting }: {
+    {
+      setSubmitting,
+    }: {
       setSubmitting: (isSubmitting: boolean) => void
     }
   ) => {
     try {
       await register(values)
+      console.log('Registration successful:', data)
+    } catch (error: any) {
+      console.error('Registration error:', error?.response)
     } finally {
       setSubmitting(false)
     }
@@ -57,7 +63,14 @@ const RegisterComponent = () => {
             validationSchema={registerSchema}
             onSubmit={handleSubmit}
           >
-            {({ errors, touched, values, handleChange, handleBlur, isSubmitting: formikSubmitting }) => (
+            {({
+              errors,
+              touched,
+              values,
+              handleChange,
+              handleBlur,
+              isSubmitting: formikSubmitting,
+            }) => (
               <Form className="space-y-3">
                 {/* Name Field */}
                 <div className="space-y-1">
@@ -78,9 +91,13 @@ const RegisterComponent = () => {
                     disabled={loadingRegister || formikSubmitting}
                     className={`w-full px-3 py-2 text-base border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
                       touched.name && errors.name
-                        ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                        : "border-slate-300 focus:ring-primary-500 focus:border-primary-500"
-                    } ${loadingRegister || formikSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
+                        ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+                        : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'
+                    } ${
+                      loadingRegister || formikSubmitting
+                        ? 'opacity-50 cursor-not-allowed'
+                        : ''
+                    }`}
                   />
                   {touched.name && errors.name && (
                     <p className="text-sm text-red-600 mt-0.5">{errors.name}</p>
@@ -106,12 +123,18 @@ const RegisterComponent = () => {
                     disabled={loadingRegister || formikSubmitting}
                     className={`w-full px-3 py-2 text-base border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
                       touched.email && errors.email
-                        ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                        : "border-slate-300 focus:ring-primary-500 focus:border-primary-500"
-                    } ${loadingRegister || formikSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
+                        ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+                        : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'
+                    } ${
+                      loadingRegister || formikSubmitting
+                        ? 'opacity-50 cursor-not-allowed'
+                        : ''
+                    }`}
                   />
                   {touched.email && errors.email && (
-                    <p className="text-sm text-red-600 mt-0.5">{errors.email}</p>
+                    <p className="text-sm text-red-600 mt-0.5">
+                      {errors.email}
+                    </p>
                   )}
                 </div>
 
@@ -127,7 +150,7 @@ const RegisterComponent = () => {
                     <input
                       id="password"
                       name="password"
-                      type={isPasswordVisible ? "text" : "password"}
+                      type={isPasswordVisible ? 'text' : 'password'}
                       value={values.password}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -135,9 +158,13 @@ const RegisterComponent = () => {
                       disabled={loadingRegister || formikSubmitting}
                       className={`w-full px-3 py-2 pr-10 text-base border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
                         touched.password && errors.password
-                          ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                          : "border-slate-300 focus:ring-primary-500 focus:border-primary-500"
-                      } ${loadingRegister || formikSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
+                          ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+                          : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'
+                      } ${
+                        loadingRegister || formikSubmitting
+                          ? 'opacity-50 cursor-not-allowed'
+                          : ''
+                      }`}
                     />
                     <button
                       type="button"
@@ -153,7 +180,9 @@ const RegisterComponent = () => {
                     </button>
                   </div>
                   {touched.password && errors.password && (
-                    <p className="text-sm text-red-600 mt-0.5">{errors.password}</p>
+                    <p className="text-sm text-red-600 mt-0.5">
+                      {errors.password}
+                    </p>
                   )}
                 </div>
 
@@ -169,21 +198,30 @@ const RegisterComponent = () => {
                     <input
                       id="password_confirmation"
                       name="password_confirmation"
-                      type={isPasswordConfirmationVisible ? "text" : "password"}
+                      type={isPasswordConfirmationVisible ? 'text' : 'password'}
                       value={values.password_confirmation}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       placeholder="Confirm your password"
                       disabled={loadingRegister || formikSubmitting}
                       className={`w-full px-3 py-2 pr-10 text-base border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
-                        touched.password_confirmation && errors.password_confirmation
-                          ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                          : "border-slate-300 focus:ring-primary-500 focus:border-primary-500"
-                      } ${loadingRegister || formikSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
+                        touched.password_confirmation &&
+                        errors.password_confirmation
+                          ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+                          : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'
+                      } ${
+                        loadingRegister || formikSubmitting
+                          ? 'opacity-50 cursor-not-allowed'
+                          : ''
+                      }`}
                     />
                     <button
                       type="button"
-                      onClick={() => setIsPasswordConfirmationVisible(!isPasswordConfirmationVisible)}
+                      onClick={() =>
+                        setIsPasswordConfirmationVisible(
+                          !isPasswordConfirmationVisible
+                        )
+                      }
                       className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-slate-700 transition-colors"
                       tabIndex={-1}
                     >
@@ -194,9 +232,12 @@ const RegisterComponent = () => {
                       )}
                     </button>
                   </div>
-                  {touched.password_confirmation && errors.password_confirmation && (
-                    <p className="text-sm text-red-600 mt-0.5">{errors.password_confirmation}</p>
-                  )}
+                  {touched.password_confirmation &&
+                    errors.password_confirmation && (
+                      <p className="text-sm text-red-600 mt-0.5">
+                        {errors.password_confirmation}
+                      </p>
+                    )}
                 </div>
 
                 {/* Submit Button */}
@@ -206,7 +247,9 @@ const RegisterComponent = () => {
                   className="w-full mt-3 inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 shadow-md hover:shadow-lg active:scale-95 px-4 py-2 text-base"
                 >
                   <UserPlus className="w-4 h-4" />
-                  {loadingRegister || formikSubmitting ? "Creating account..." : "Sign Up"}
+                  {loadingRegister || formikSubmitting
+                    ? 'Creating account...'
+                    : 'Sign Up'}
                 </button>
               </Form>
             )}
@@ -225,7 +268,7 @@ const RegisterComponent = () => {
           {/* Login Link */}
           <div className="text-center">
             <p className="text-sm text-slate-600">
-              Already have an account?{" "}
+              Already have an account?{' '}
               <Link
                 href="/login"
                 className="text-primary-600 hover:text-primary-700 font-semibold transition-colors"

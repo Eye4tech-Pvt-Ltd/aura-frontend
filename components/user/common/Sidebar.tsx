@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import {
   Sparkles,
   LayoutDashboard,
@@ -20,31 +20,34 @@ import {
   HelpCircle,
   Search,
   LogOut,
-} from "lucide-react";
-import useLogout from "@/src/hooks/auth/useLogout";
+} from 'lucide-react'
+import useLogout from '@/src/hooks/auth/useLogout'
+import { UserData } from '@/src/types/user'
 
 const navItems = [
-  { label: "Overview", path: "/user", icon: LayoutDashboard },
-  { label: "Calls", path: "/user/calls", icon: Phone },
-  { label: "AI Agent", path: "/user/agent", icon: Bot },
-  { label: "Flows", path: "/user/flows", icon: GitBranch },
-  { label: "Knowledge", path: "/user/knowledge", icon: BookOpen },
-  { label: "Numbers", path: "/user/numbers", icon: Hash },
-  { label: "Analytics", path: "/user/analytics", icon: BarChart3 },
-  { label: "Team", path: "/user/team", icon: Users },
-  { label: "Integrations", path: "/user/integrations", icon: Plug },
-  { label: "Billing", path: "/user/billing", icon: CreditCard },
-  { label: "Settings", path: "/user/settings", icon: Settings },
-];
+  { label: 'Overview', path: '/user', icon: LayoutDashboard },
+  { label: 'Calls', path: '/user/calls', icon: Phone },
+  { label: 'AI Agent', path: '/user/agent', icon: Bot },
+  { label: 'Flows', path: '/user/flows', icon: GitBranch },
+  { label: 'Knowledge', path: '/user/knowledge', icon: BookOpen },
+  { label: 'Numbers', path: '/user/numbers', icon: Hash },
+  { label: 'Analytics', path: '/user/analytics', icon: BarChart3 },
+  { label: 'Team', path: '/user/team', icon: Users },
+  { label: 'Integrations', path: '/user/integrations', icon: Plug },
+  { label: 'Billing', path: '/user/billing', icon: CreditCard },
+  { label: 'Settings', path: '/user/settings', icon: Settings },
+]
 
 const Sidebar = () => {
-  const pathname = usePathname();
-  const { logout, loadingLogout } = useLogout();
-
+  const pathname = usePathname()
+  const { logout, loadingLogout } = useLogout()
+  const profile: any = (state: any) => {
+    return state.profile
+  }
   return (
     <>
       {/* Top Header Bar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200/60 pl-64">
+      <header className="fixed top-0 left-0 right-0 z-20 bg-white border-b border-slate-200/60 pl-64">
         <div className="px-6 h-16 flex items-center justify-between">
           {/* Search */}
           <div className="relative flex-1 max-w-md">
@@ -73,8 +76,12 @@ const Sidebar = () => {
                 JD
               </div>
               <div className="text-left hidden md:block">
-                <p className="text-sm font-medium text-slate-900">John Doe</p>
-                <p className="text-xs text-slate-600">Admin</p>
+                <p className="text-sm font-medium text-slate-900">
+                  {profile?.name || 'Guest User'}
+                </p>
+                <p className="text-xs text-slate-600">
+                  {profile?.role || 'User'}
+                </p>
               </div>
               <ChevronDown className="w-4 h-4 text-slate-500" />
             </button>
@@ -83,7 +90,7 @@ const Sidebar = () => {
       </header>
 
       {/* Sidebar */}
-      <aside className="fixed top-0 left-0 bottom-0 w-64 bg-white border-r border-slate-200/60 z-50">
+      <aside className="fixed top-0 left-0 bottom-0 z-20 w-64 bg-white border-r border-slate-200/60 ">
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="h-16 flex items-center gap-3 px-6 border-b border-slate-200/60">
@@ -105,7 +112,9 @@ const Sidebar = () => {
                 AC
               </div>
               <div className="flex-1 text-left">
-                <p className="text-sm font-semibold text-slate-900">Acme Corp</p>
+                <p className="text-sm font-semibold text-slate-900">
+                  Acme Corp
+                </p>
                 <p className="text-xs text-slate-600">Pro Plan</p>
               </div>
               <ChevronDown className="w-4 h-4 text-slate-500" />
@@ -116,8 +125,8 @@ const Sidebar = () => {
           <nav className="flex-1 px-4 py-4 overflow-y-auto">
             <div className="space-y-1">
               {navItems?.map((item) => {
-                const Icon = item.icon;
-                const isActive = pathname === item.path;
+                const Icon = item.icon
+                const isActive = pathname === item.path
 
                 return (
                   <Link
@@ -125,14 +134,17 @@ const Sidebar = () => {
                     href={item.path}
                     className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                       isActive
-                        ? "bg-gradient-to-r from-primary-400 to-primary-500 text-white shadow-lg shadow-primary-500/30"
-                        : "text-slate-700 hover:bg-slate-50"
+                        ? 'bg-gradient-to-r from-primary-400 to-primary-500 text-white shadow-lg shadow-primary-500/30'
+                        : 'text-slate-700 hover:bg-slate-50'
                     }`}
                   >
-                    <Icon className="w-5 h-5" strokeWidth={isActive ? 2.5 : 2} />
+                    <Icon
+                      className="w-5 h-5"
+                      strokeWidth={isActive ? 2.5 : 2}
+                    />
                     <span>{item.label}</span>
                   </Link>
-                );
+                )
               })}
             </div>
           </nav>
@@ -151,23 +163,23 @@ const Sidebar = () => {
               </button>
             </div>
             <div className="mt-4">
-            <button
-              onClick={logout}
-              disabled={loadingLogout}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all w-full ${
-                loadingLogout
-                  ? "opacity-70 cursor-not-allowed"
-                  : "cursor-pointer"
-              } bg-gradient-to-r from-accent-red-500 to-accent-red-600 text-white hover:from-accent-red-600 hover:to-accent-red-700 shadow-lg shadow-accent-red-500/30 hover:shadow-accent-red-500/40 active:scale-[0.98]`}
-            >
-              <LogOut className="w-5 h-5" strokeWidth={2.5} />
-              <span>{loadingLogout ? "Logging out..." : "Log out"}</span>
-            </button>
+              <button
+                onClick={logout}
+                disabled={loadingLogout}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all w-full ${
+                  loadingLogout
+                    ? 'opacity-70 cursor-not-allowed'
+                    : 'cursor-pointer'
+                } bg-gradient-to-r from-accent-red-500 to-accent-red-600 text-white hover:from-accent-red-600 hover:to-accent-red-700 shadow-lg shadow-accent-red-500/30 hover:shadow-accent-red-500/40 active:scale-[0.98]`}
+              >
+                <LogOut className="w-5 h-5" strokeWidth={2.5} />
+                <span>{loadingLogout ? 'Logging out...' : 'Log out'}</span>
+              </button>
             </div>
           </div>
         </div>
       </aside>
     </>
-  );
+  )
 }
 export default Sidebar

@@ -1,9 +1,9 @@
-import Sidebar from "@/components/user/common/Sidebar";
+import Sidebar from '@/components/user/common/Sidebar'
 
 export default function UserLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <div className="flex">
@@ -12,5 +12,5 @@ export default function UserLayout({
         {children}
       </main>
     </div>
-  );
+  )
 }

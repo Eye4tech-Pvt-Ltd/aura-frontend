@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-import Register from '@/components/register'
-import React from 'react'
 
-const page = () => {
-  return <Register />
-}
-
-export default page
-=======
 import RegisterComponent from "@/components/auth/register";
 import type { Metadata } from "next";
 
@@ -32,4 +23,4 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
->>>>>>> 8bcc3f1825b4f72fcfba081828aac4a3295c309b
+

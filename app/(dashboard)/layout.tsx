@@ -1,4 +1,4 @@
-import Sidebar from '@/components/common/Sidebar'
+import Sidebar from '@/components/user/common/Sidebar'
 import React from 'react'
 
 export default function DashboardLayout({
