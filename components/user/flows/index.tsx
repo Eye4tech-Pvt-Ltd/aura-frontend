@@ -194,7 +194,7 @@ const Flows = () => {
   const selectedNodeData = nodes.find(n => n.id === selectedNode);
 
   return (
-    <div className="h-screen bg-slate-50 p-8 overflow-hidden">
+    <div className="h-screen bg-slate-50 p-2 sm:p-8 overflow-hidden">
       <div className="h-full flex flex-col">
         {/* Header */}
         <div className="mb-6">

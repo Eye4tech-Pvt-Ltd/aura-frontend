@@ -2,11 +2,14 @@
 
 import { Formik, Form } from 'formik'
 import { useState } from 'react'
-import { UserPlus, Eye, EyeOff } from 'lucide-react'
+import { UserPlus, Eye, EyeOff, Mail, Lock, User } from 'lucide-react'
 import Link from 'next/link'
 import { registerSchema } from '@/src/schemas/register'
 import { RegisterPayload } from '@/src/types/register'
 import useRegister from '@/src/hooks/auth/useRegister'
+import EmailInput from '@/components/common/Input/EmailInput'
+import PasswordInput from '@/components/common/Input/PasswordInput'
+import TextInput from '@/components/common/Input/TextInput'
 
 const RegisterComponent = () => {
   const { register, loadingRegister, data } = useRegister()
@@ -73,172 +76,38 @@ const RegisterComponent = () => {
             }) => (
               <Form className="space-y-3">
                 {/* Name Field */}
-                <div className="space-y-1">
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-slate-700"
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    value={values.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    placeholder="Enter your full name"
-                    disabled={loadingRegister || formikSubmitting}
-                    className={`w-full px-3 py-2 text-base border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
-                      touched.name && errors.name
-                        ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                        : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'
-                    } ${
-                      loadingRegister || formikSubmitting
-                        ? 'opacity-50 cursor-not-allowed'
-                        : ''
-                    }`}
-                  />
-                  {touched.name && errors.name && (
-                    <p className="text-sm text-red-600 mt-0.5">{errors.name}</p>
-                  )}
-                </div>
+
+                <TextInput
+                  name="name"
+                  placeHolder="Enter your Name"
+                  label="Full Name"
+                  icon={User}
+                />
 
                 {/* Email Field */}
-                <div className="space-y-1">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-slate-700"
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    placeholder="Enter your email"
-                    disabled={loadingRegister || formikSubmitting}
-                    className={`w-full px-3 py-2 text-base border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
-                      touched.email && errors.email
-                        ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                        : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'
-                    } ${
-                      loadingRegister || formikSubmitting
-                        ? 'opacity-50 cursor-not-allowed'
-                        : ''
-                    }`}
-                  />
-                  {touched.email && errors.email && (
-                    <p className="text-sm text-red-600 mt-0.5">
-                      {errors.email}
-                    </p>
-                  )}
-                </div>
+
+                <EmailInput icon={Mail} focus={true} />
 
                 {/* Password Field */}
-                <div className="space-y-1">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-slate-700"
-                  >
-                    Password
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="password"
-                      name="password"
-                      type={isPasswordVisible ? 'text' : 'password'}
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="Enter your password"
-                      disabled={loadingRegister || formikSubmitting}
-                      className={`w-full px-3 py-2 pr-10 text-base border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
-                        touched.password && errors.password
-                          ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                          : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'
-                      } ${
-                        loadingRegister || formikSubmitting
-                          ? 'opacity-50 cursor-not-allowed'
-                          : ''
-                      }`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setIsPasswordVisible(!isPasswordVisible)}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-slate-700 transition-colors"
-                      tabIndex={-1}
-                    >
-                      {isPasswordVisible ? (
-                        <EyeOff className="h-4 w-4" />
-                      ) : (
-                        <Eye className="h-4 w-4" />
-                      )}
-                    </button>
-                  </div>
-                  {touched.password && errors.password && (
-                    <p className="text-sm text-red-600 mt-0.5">
-                      {errors.password}
-                    </p>
-                  )}
-                </div>
 
-                {/* Password Confirmation Field */}
-                <div className="space-y-1">
-                  <label
-                    htmlFor="password_confirmation"
-                    className="block text-sm font-medium text-slate-700"
-                  >
-                    Confirm Password
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="password_confirmation"
-                      name="password_confirmation"
-                      type={isPasswordConfirmationVisible ? 'text' : 'password'}
-                      value={values.password_confirmation}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="Confirm your password"
-                      disabled={loadingRegister || formikSubmitting}
-                      className={`w-full px-3 py-2 pr-10 text-base border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
-                        touched.password_confirmation &&
-                        errors.password_confirmation
-                          ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                          : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'
-                      } ${
-                        loadingRegister || formikSubmitting
-                          ? 'opacity-50 cursor-not-allowed'
-                          : ''
-                      }`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setIsPasswordConfirmationVisible(
-                          !isPasswordConfirmationVisible
-                        )
-                      }
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-slate-700 transition-colors"
-                      tabIndex={-1}
-                    >
-                      {isPasswordConfirmationVisible ? (
-                        <EyeOff className="h-4 w-4" />
-                      ) : (
-                        <Eye className="h-4 w-4" />
-                      )}
-                    </button>
-                  </div>
-                  {touched.password_confirmation &&
-                    errors.password_confirmation && (
-                      <p className="text-sm text-red-600 mt-0.5">
-                        {errors.password_confirmation}
-                      </p>
-                    )}
-                </div>
+                <PasswordInput
+                  name="password"
+                  icon={Lock}
+                  toggle={() => setIsPasswordVisible(!isPasswordVisible)}
+                  placeHolder="Enter Password"
+                  visible={isPasswordVisible}
+                />
+                <PasswordInput
+                  name="password_confirmation"
+                  icon={Lock}
+                  toggle={() =>
+                    setIsPasswordConfirmationVisible(
+                      !isPasswordConfirmationVisible
+                    )
+                  }
+                  placeHolder="Confirm your password Password"
+                  visible={isPasswordConfirmationVisible}
+                />
 
                 {/* Submit Button */}
                 <button

@@ -3,7 +3,7 @@ import { useMutation } from '../useMutation'
 import { apiRequest } from '@/src/lib/api/api-client'
 import axiosInstance from '@/src/lib/api/axios-instance'
 import { API_ENDPOINTS } from '@/src/lib/api/endpoints'
-
+import Cookies from 'js-cookie'
 const useLogout = () => {
   const router = useRouter()
 
@@ -16,7 +16,7 @@ const useLogout = () => {
     const res = await mutateLogout()
     console.log(res)
     if (res !== undefined) {
-      localStorage.removeItem('token')
+      Cookies.remove('token')
       router.push('/login')
     }
   }

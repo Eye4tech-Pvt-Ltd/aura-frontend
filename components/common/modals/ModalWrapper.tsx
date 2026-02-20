@@ -34,30 +34,28 @@ const ModalWrapper = ({
         >
           {() => (
             <Form>
-              <div className="bg-white rounded-xl border border-slate-200/60 shadow-md p-6">
-                <h3 className="font-semibold text-slate-900 mb-4">{title}</h3>
+              <h3 className="font-semibold text-slate-900 mb-4">{title}</h3>
 
-                <div className="space-y-4">{children}</div>
+              <div className="space-y-4">{children}</div>
 
-                <div className="flex gap-2 pt-4">
-                  <Button
-                    disabled={loading}
-                    type="submit"
-                    variant="primary"
-                    className="flex-1 cursor-pointer"
-                  >
-                    {btnText}
-                  </Button>
+              <div className="flex gap-2 pt-4">
+                <Button
+                  disabled={loading}
+                  type="submit"
+                  variant="primary"
+                  className="flex-1 cursor-pointer"
+                >
+                  {btnText}
+                </Button>
 
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="cursor-pointer"
-                    onClick={toggle}
-                  >
-                    Cancel
-                  </Button>
-                </div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="cursor-pointer"
+                  onClick={toggle}
+                >
+                  Cancel
+                </Button>
               </div>
             </Form>
           )}

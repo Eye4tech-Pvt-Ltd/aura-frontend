@@ -23,17 +23,18 @@ import {
 } from 'lucide-react'
 import useLogout from '@/src/hooks/auth/useLogout'
 import { UserData } from '@/src/types/user'
+import { useModal } from '@/app/context/ModalContext'
 
 const navItems = [
-  { label: 'Overview', path: '/user', icon: LayoutDashboard },
+  // { label: 'Overview', path: '/user', icon: LayoutDashboard },
+  { label: 'Analytics', path: '/user/analytics', icon: BarChart3 },
   { label: 'Calls', path: '/user/calls', icon: Phone },
   { label: 'AI Agent', path: '/user/agent', icon: Bot },
   { label: 'Flows', path: '/user/flows', icon: GitBranch },
   { label: 'Knowledge', path: '/user/knowledge', icon: BookOpen },
   { label: 'Numbers', path: '/user/numbers', icon: Hash },
-  { label: 'Analytics', path: '/user/analytics', icon: BarChart3 },
   { label: 'Team', path: '/user/team', icon: Users },
-  { label: 'Integrations', path: '/user/integrations', icon: Plug },
+  // { label: 'Integrations', path: '/user/integrations', icon: Plug },
   { label: 'Billing', path: '/user/billing', icon: CreditCard },
   { label: 'Settings', path: '/user/settings', icon: Settings },
 ]
@@ -44,6 +45,7 @@ const Sidebar = () => {
   const profile: any = (state: any) => {
     return state.profile
   }
+  const { closeModal, openModal } = useModal()
   return (
     <>
       {/* Top Header Bar */}
@@ -90,7 +92,7 @@ const Sidebar = () => {
       </header>
 
       {/* Sidebar */}
-      <aside className="fixed top-0 left-0 bottom-0 z-20 w-64 bg-white border-r border-slate-200/60 ">
+      <aside className="fixed top-0 left-0 bottom-0 z-20 w-52 sm:w-64 bg-white border-r border-slate-200/60 ">
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="h-16 flex items-center gap-3 px-6 border-b border-slate-200/60">
@@ -164,7 +166,16 @@ const Sidebar = () => {
             </div>
             <div className="mt-4">
               <button
-                onClick={logout}
+                onClick={() =>
+                  openModal(
+                    'Are you sure you want to logout',
+                    async () => {
+                      closeModal()
+                      await logout()
+                    },
+                    'Log Out'
+                  )
+                }
                 disabled={loadingLogout}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all w-full ${
                   loadingLogout

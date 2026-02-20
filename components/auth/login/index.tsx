@@ -2,13 +2,16 @@
 
 import { Formik, Form } from 'formik'
 import { useState } from 'react'
-import { LogIn, Eye, EyeOff } from 'lucide-react'
+import { LogIn, Eye, EyeOff, Mail, Lock } from 'lucide-react'
 import Link from 'next/link'
-import { loginSchema } from '@/src/schemas/login'
+
 import { LoginPayload } from '@/src/types/login'
 import useLogin from '@/src/hooks/auth/useLogin'
 import { useDispatch } from 'react-redux'
 import { setProfile } from '@/src/store/reducers/userProfile'
+import EmailInput from '@/components/common/Input/EmailInput'
+import PasswordInput from '@/components/common/Input/PasswordInput'
+import { loginSchema } from '@/src/validation/user-schema'
 
 const LoginComponent = () => {
   const { login, loadingLogin, data } = useLogin()
@@ -70,86 +73,18 @@ const LoginComponent = () => {
             }) => (
               <Form className="space-y-3">
                 {/* Email Field */}
-                <div className="space-y-1">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-slate-700"
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    placeholder="Enter your email"
-                    disabled={loadingLogin || formikSubmitting}
-                    className={`w-full px-3 py-2 text-base border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
-                      touched.email && errors.email
-                        ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                        : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'
-                    } ${
-                      loadingLogin || formikSubmitting
-                        ? 'opacity-50 cursor-not-allowed'
-                        : ''
-                    }`}
-                  />
-                  {touched.email && errors.email && (
-                    <p className="text-sm text-red-600 mt-0.5">
-                      {errors.email}
-                    </p>
-                  )}
-                </div>
+
+                <EmailInput icon={Mail} focus={true} />
 
                 {/* Password Field */}
-                <div className="space-y-1">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-slate-700"
-                  >
-                    Password
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="password"
-                      name="password"
-                      type={isPasswordVisible ? 'text' : 'password'}
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="Enter your password"
-                      disabled={loadingLogin || formikSubmitting}
-                      className={`w-full px-3 py-2 pr-10 text-base border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
-                        touched.password && errors.password
-                          ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-                          : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'
-                      } ${
-                        loadingLogin || formikSubmitting
-                          ? 'opacity-50 cursor-not-allowed'
-                          : ''
-                      }`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setIsPasswordVisible(!isPasswordVisible)}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-slate-700 transition-colors"
-                      tabIndex={-1}
-                    >
-                      {isPasswordVisible ? (
-                        <EyeOff className="h-4 w-4" />
-                      ) : (
-                        <Eye className="h-4 w-4" />
-                      )}
-                    </button>
-                  </div>
-                  {touched.password && errors.password && (
-                    <p className="text-sm text-red-600 mt-0.5">
-                      {errors.password}
-                    </p>
-                  )}
-                </div>
+
+                <PasswordInput
+                  name="password"
+                  icon={Lock}
+                  toggle={() => setIsPasswordVisible(!isPasswordVisible)}
+                  placeHolder="Enter Password"
+                  visible={isPasswordVisible}
+                />
 
                 {/* Forgot Password Link */}
                 <div className="flex items-center justify-end -mt-1">
@@ -165,7 +100,7 @@ const LoginComponent = () => {
                 <button
                   type="submit"
                   disabled={formikSubmitting || loadingLogin}
-                  className="w-full mt-3 inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 shadow-md hover:shadow-lg active:scale-95 px-4 py-2 text-base"
+                  className=" w-full mt-3 inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 shadow-md hover:shadow-lg active:scale-95 px-4 py-2 text-base"
                 >
                   <LogIn className="w-4 h-4" />
                   {loadingLogin || formikSubmitting

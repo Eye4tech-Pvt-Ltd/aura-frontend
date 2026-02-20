@@ -8,3 +8,6 @@ export const emailSchema = Yup.string()
 export const roleSchema = Yup.string()
   .oneOf(['admin', 'customer'], 'Please select a valid role')
   .required('Role is required')
+export const passwordSchema = Yup.string()
+  .min(6, 'Password must be at least 6 characters')
+  

@@ -23,49 +23,8 @@ import {
   TeammateGetResponseData,
   TeammateResponseData,
 } from '@/src/types/teamate'
-
-const teamMembers = [
-  {
-    id: 1,
-    name: 'John Doe',
-    email: 'john@acmecorp.com',
-    role: 'Owner',
-    avatar: 'JD',
-    status: 'active',
-    lastActive: '2 hours ago',
-    callsHandled: 0,
-  },
-  {
-    id: 2,
-    name: 'Sarah Johnson',
-    email: 'sarah@acmecorp.com',
-    role: 'Admin',
-    avatar: 'SJ',
-    status: 'active',
-    lastActive: '5 minutes ago',
-    callsHandled: 12,
-  },
-  {
-    id: 3,
-    name: 'Michael Chen',
-    email: 'michael@acmecorp.com',
-    role: 'Agent',
-    avatar: 'MC',
-    status: 'active',
-    lastActive: '1 hour ago',
-    callsHandled: 45,
-  },
-  {
-    id: 4,
-    name: 'Emma Williams',
-    email: 'emma@acmecorp.com',
-    role: 'Agent',
-    avatar: 'EW',
-    status: 'inactive',
-    lastActive: '2 days ago',
-    callsHandled: 23,
-  },
-]
+import Pagination from '@/components/common/Pagination'
+import Input from '@/components/common/Input/Input'
 
 const roles = [
   {
@@ -104,12 +63,14 @@ const roles = [
 ]
 
 const Team = () => {
+  const [page, setPage] = useState(1)
   const {
     data: teamGetData,
     error: teamGetError,
     mutate: teamGetMutate,
     isLoading: teamGetLoading,
   } = useGetSWR<TeammateGetResponseData>('/team-members')
+
   const [showInviteModal, setShowInviteModal] = useState(false)
   const [selectedData, setSelectedData] = useState<TeammateData | null>(null)
   const [editTeamMember, setEditTeamMember] = useState(false)
@@ -118,7 +79,7 @@ const Team = () => {
   const { deleteData, loading } = useDelete('/team-members')
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8">
+    <div className="min-h-screen bg-slate-50 p-2 sm:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -154,16 +115,17 @@ const Team = () => {
                 {teamGetData && teamGetData?.users?.length > 0 ? (
                   <div>
                     <div className="p-4 border-b border-slate-200">
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
                         <h2 className="font-semibold text-slate-900">
                           Team Members ({teamGetData?.users?.length})
                         </h2>
-                        <div className="relative">
-                          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                          <input
-                            type="text"
-                            placeholder="Search members..."
-                            className="pl-9 pr-3 py-1.5 w-64 bg-slate-50 border border-slate-200 rounded-lg text-sm"
+                        <div className="w-full md:w-2/4">
+                          <Input
+                            name={'search'}
+                            type={'text'}
+                            placeholder={'Search here'}
+                            Icon={Search}
+                            handleChange={() => {}}
                           />
                         </div>
                       </div>
@@ -226,7 +188,11 @@ const Team = () => {
                                 </div>
                                 <div className="relative">
                                   <button
-                                    onClick={() => setSelectedData(member)}
+                                    onClick={() => {
+                                      setSelectedData(
+                                        selectedData ? null : member
+                                      )
+                                    }}
                                     className="cursor-pointer p-2 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors"
                                   >
                                     <MoreVertical className="w-5 h-5" />
@@ -258,6 +224,7 @@ const Team = () => {
                           )
                         })}
                     </div>
+                    <Pagination page={page} setPage={setPage} totalPages={20} />
                   </div>
                 ) : (
                   <p className="text-center text-md font-normal">

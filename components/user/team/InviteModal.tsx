@@ -1,9 +1,10 @@
-import Input from '@/components/common/Input'
+import EmailInput from '@/components/common/Input/EmailInput'
+import Input from '@/components/common/Input/Input'
 import ModalWrapper from '@/components/common/modals/ModalWrapper'
 import Selector from '@/components/common/Selector'
 import { usePost } from '@/src/lib/api/swr-fetcher'
 import { inviteMemberSchema } from '@/src/validation/teammate-schema'
-import { Mail } from 'lucide-react'
+import { Briefcase, Mail, ShieldCheck } from 'lucide-react'
 import React from 'react'
 
 const InviteModal = ({ setModal }: { setModal: (show: boolean) => void }) => {
@@ -25,15 +26,14 @@ const InviteModal = ({ setModal }: { setModal: (show: boolean) => void }) => {
       handleSubmit={handleSubmit}
       loading={loading}
     >
-      <Input
-        name="email"
-        label="Email Address"
-        placeholder="colleague@company.com"
-        icon={Mail}
-        focus={true}
-      />
+      <EmailInput icon={Mail} focus={true} />
 
-      <Selector name="role" label="Role" options={['admin', 'customer']} />
+      <Selector
+        Icon={ShieldCheck}
+        name="role"
+        label="Role"
+        options={['admin', 'customer']}
+      />
     </ModalWrapper>
   )
 }
