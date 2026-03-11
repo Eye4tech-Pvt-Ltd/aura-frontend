@@ -1,5 +1,5 @@
-import { toastSuccess } from "./toast-handler"
-import { handleAxiosError } from "./error-handler"
+import { toastSuccess } from './toast-handler'
+import { handleAxiosError } from './error-handler'
 
 export interface ApiResponse<T> {
   status: boolean
@@ -30,6 +30,7 @@ export async function apiRequest<T>(
 
     return response.data
   } catch (error: any) {
+    console.log('API Request Error:', error?.response || error)
     handleAxiosError(error)
     throw error
   }
